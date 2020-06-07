@@ -27,23 +27,25 @@ class MyHomePage extends StatelessWidget {
         title: Text('Personal Expenses'),
         backgroundColor: Colors.purple,
       ),
-      body: Column(
-        // mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Container(
-            width: double.infinity,
-            child: Card(
-              color: Colors.purple,
-              child: Text(
-                'CHART!',
-                textAlign: TextAlign.center,
+      body: SingleChildScrollView(
+              child: Column(
+          // mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Container(
+              width: double.infinity,
+              child: Card(
+                color: Colors.purple,
+                child: Text(
+                  'CHART!',
+                  textAlign: TextAlign.center,
+                ),
+                elevation: 5,
               ),
-              elevation: 5,
             ),
-          ),
-        UserTransactions(),
-        ],
+          UserTransactions(),
+          ],
+        ),
       ),
     );
   }

@@ -34,7 +34,7 @@ class Chart extends StatelessWidget {
   }
 
   double get totalSpending {
-    return groupedTransactionsValues.fold(0.0, (sum, item)  {
+    return groupedTransactionsValues.fold(0.0, (sum, item) {
       return sum + item['amount'];
     });
   }
@@ -45,15 +45,24 @@ class Chart extends StatelessWidget {
     return Card(
       elevation: 6,
       margin: EdgeInsets.all(20),
-      child: Row(
-        children: groupedTransactionsValues.map((data) {
-          return ChartBar(
-            data['day'],
-            data['amount'],
-            totalSpending == 0.0 ? 0.0 : (data['amount'] as double) / totalSpending,
-          );
-          // return Text('${data['day']}: ${data['amount']}');
-        }).toList(),
+      child: Padding(
+        padding: EdgeInsets.all(10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: groupedTransactionsValues.map((data) {
+            return Flexible(
+              fit: FlexFit.tight,
+              child: ChartBar(
+                data['day'],
+                data['amount'],
+                totalSpending == 0.0
+                    ? 0.0
+                    : (data['amount'] as double) / totalSpending,
+              ),
+            );
+            // return Text('${data['day']}: ${data['amount']}');
+          }).toList(),
+        ),
       ),
     );
   }

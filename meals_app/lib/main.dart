@@ -9,6 +9,9 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+
+  static const initialRoute = '/';
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

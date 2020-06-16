@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meals_app/main.dart';
 
 import '../dummy_data.dart';
 
@@ -34,11 +35,10 @@ class MealDetailScreen extends StatelessWidget {
     );
   }
 
-  // void goHomeScreen(BuildContext context){
-  //    Navigator.of(context).pushNamed(
-  //     initialRoute,
-  //   );
-  // }
+  void goHomeScreen(BuildContext context){
+     Navigator.of(context).pop();
+     Navigator.of(context).pop();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,7 @@ class MealDetailScreen extends StatelessWidget {
         title: Text('${selectedMeal.title}'),
         actions: <Widget>[
           FlatButton(
-              onPressed: () {} ,
+              onPressed: () => goHomeScreen(context),
               child: Icon(
                 Icons.home,
                 color: Colors.white,

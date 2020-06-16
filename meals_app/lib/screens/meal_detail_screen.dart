@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meals_app/main.dart';
+import 'package:meals_app/screens/category_meals_screen.dart';
 
 import '../dummy_data.dart';
 
@@ -36,8 +37,7 @@ class MealDetailScreen extends StatelessWidget {
   }
 
   void goHomeScreen(BuildContext context){
-     Navigator.of(context).pop();
-     Navigator.of(context).pop();
+    Navigator.popUntil(context, ModalRoute.withName(MyApp.initialRoute));
   }
 
   @override

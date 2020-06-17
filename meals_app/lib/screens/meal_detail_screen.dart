@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:meals_app/main.dart';
-import 'package:meals_app/screens/category_meals_screen.dart';
 
 import '../dummy_data.dart';
 
@@ -36,7 +35,7 @@ class MealDetailScreen extends StatelessWidget {
     );
   }
 
-  void goHomeScreen(BuildContext context){
+  void goHomeScreen(BuildContext context) {
     Navigator.popUntil(context, ModalRoute.withName(MyApp.initialRoute));
   }
 
@@ -102,6 +101,14 @@ class MealDetailScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(
+          Icons.delete,
+        ),
+        onPressed: () {
+          Navigator.of(context).pop(mealId);
+        },
       ),
     );
   }

@@ -38,13 +38,33 @@ class Products with ChangeNotifier {
     ),
   ];
 
+  // var _showFavouritesOnly = false;
+
+
   List<Product> get items {
+    // if(_showFavouritesOnly) {
+    //   return [..._items].where((prodItem) => prodItem.isFavourite).toList();
+    // }
     return [..._items];
   }
 
   Product findById(String id) {
     return _items.firstWhere((prod) => prod.id == id);
   }
+
+  List<Product> get favouriteItems {
+    return _items.where((prodItem) => prodItem.isFavourite).toList();
+  }
+
+  // void showFavouritesOnly(){
+  //   _showFavouritesOnly = true;
+  //   notifyListeners();
+  // }
+
+  // void showAll( ){
+  //   _showFavouritesOnly = false;
+  //   notifyListeners();
+  // }
 
   void addProduct() {
     // _items.add(value);

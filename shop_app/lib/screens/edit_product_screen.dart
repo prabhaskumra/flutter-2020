@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'dart:io';
+import 'package:flutter/cupertino.dart';
 
 import '../providers/product.dart';
 import '../providers/products.dart';
@@ -83,7 +85,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
     }
   }
 
-  void _saveForm() {
+  Future<void> _saveForm() async {
     final isValid = _form.currentState.validate();
     if (!isValid) {
       return;
@@ -101,15 +103,33 @@ class _EditProductScreenState extends State<EditProductScreen> {
       });
     } else {
       // Send HTTP request
-
-      Provider.of<Products>(context, listen: false)
-          .addProduct(_editedProduct)
-          .then((_) {
+      try {
+        await Provider.of<Products>(context, listen: false)
+            .addProduct(_editedProduct);
+      } catch (error) {
+        await showDialog(
+          context: context,
+          builder: (ctx) => AlertDialog(
+            title: Text(
+              'An error occured',
+            ),
+            content: Text('Something went wrong'),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('Okay'),
+                onPressed: () {
+                  Navigator.of(ctx).pop();
+                },
+              ),
+            ],
+          ),
+        );
+      } finally {
         setState(() {
           _isLoading = false;
         });
         Navigator.of(context).pop();
-      });
+      }
     }
     // Navigator.of(context).pop();
   }
@@ -128,9 +148,11 @@ class _EditProductScreenState extends State<EditProductScreen> {
       ),
       body: _isLoading
           ? Center(
-              child: CircularProgressIndicator(
-                backgroundColor: Theme.of(context).primaryColor,
-              ),
+              child: Platform.isIOS
+                  ? CupertinoActivityIndicator()
+                  : CircularProgressIndicator(
+                      // backgroundColor: Theme.of(context).primaryColor,
+                      ),
             )
           : Padding(
               padding: const EdgeInsets.all(16.0),
